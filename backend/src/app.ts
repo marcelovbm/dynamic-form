@@ -8,7 +8,7 @@ function build(opts = {}) {
   const app = fastify(opts)
   app.setReplySerializer(serializer)
 
-  app.register(formRoutes, { prefix: '/form' })
+  app.register(formRoutes, { prefix: '/forms' })
 
   app.setErrorHandler(errorHandler)
 
