@@ -1,3 +1,5 @@
+import { SourceRecord } from "@prisma/client";
+
 export interface SourceData {
     id: string,
     sourceRecordId: string, 
@@ -5,14 +7,18 @@ export interface SourceData {
     answer: string,
 }
 
-export interface CreateSourceData {
-    formId: string, 
+export interface SourceDataInterface {
     question: string,
     answer: string,
 }
 
+export interface CreateSourceData {
+    formId: string, 
+    data: SourceDataInterface[],
+}
+
 interface SourceDataGateway {
-    create(data: CreateSourceData): Promise<SourceData>;
+    create(data: CreateSourceData): Promise<SourceRecord>;
 }
 
 export { SourceDataGateway }

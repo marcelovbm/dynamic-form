@@ -1,6 +1,4 @@
-import { CreateFormInterface } from "domain/form/CreateFormInterface";
-import { FormGateway } from "domain/form/FormGateway";
-import { FormInterface } from "domain/form/FormInterface";
+import { CreateFormInterface, FormGateway, FormInterface } from "domain/form/FormGateway";
 
 class CreateFormUseCase {
 

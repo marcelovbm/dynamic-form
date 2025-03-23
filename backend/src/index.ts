@@ -3,9 +3,7 @@ import CORSConfig from '@fastify/cors'
 import { FastifyInstance } from 'fastify'
 
 const server: FastifyInstance = build({
-  logger: {
-    level: 'error',
-  },
+  logger: true
 })
 
 server.register(CORSConfig, {
