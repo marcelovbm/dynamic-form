@@ -2,16 +2,15 @@ import { FastifyInstance } from 'fastify'
 
 import { Form } from '@prisma/client'
 
-import prisma from '../db/prisma/db_client'
-import { serializer } from './middleware/pre_serializer'
-import { IEntityId } from './schemas/common'
-import { ApiError } from './exception/errors'
+import { IEntityId } from '../schemas/common'
+import { ApiError } from '../exception/errors'
+import { GetFormUserCase } from 'application/form/GetFormUseCase'
+import { FormPrisma } from 'infrastructure/db/form/FormPrisma'
 
 async function formRoutes(app: FastifyInstance) {
-  app.setReplySerializer(serializer)
 
   const log = app.log.child({ component: 'formRoutes' })
-
+  const useCase = new GetFormUserCase(new FormPrisma());
   app.get<{
     Params: IEntityId
     Reply: Form
@@ -21,7 +20,7 @@ async function formRoutes(app: FastifyInstance) {
       const { id } = params
       log.debug('get form by id')
       try {
-        const form = await prisma.form.findUniqueOrThrow({ where: { id } })
+        const form = await useCase.execute(id);
         reply.send(form)
       } catch (err: any) {
         log.error({ err }, err.message)

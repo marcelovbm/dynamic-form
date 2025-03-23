@@ -10,6 +10,7 @@
   "description": "## Introduction The purpose of this project is to simulate the back-end development work at Vial. It implements the main stack we use for our APIs.",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -24,10 +25,11 @@
     "prettier": "^2.8.7",
     "prisma": "^6.2.1",
     "ts-node": "^10.9.1",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.2"
   },
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "migrate": "docker exec -it vial-backend-b-api npx prisma migrate deploy",
     "seed": "docker exec -it vial-backend-b-api npx prisma db seed",
     "lint": "eslint src --ext .ts",
@@ -37,6 +39,6 @@
   "author": "",
   "license": "ISC",
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   }
 }
