@@ -1,6 +1,6 @@
 import { Static, Type } from '@sinclair/typebox'
 
-import { Uuid } from './typebox_base'
+import { Uuid } from '../../routes/schemas/typebox_base'
 
 export const EntityId = Type.Object({
   id: Uuid(),
