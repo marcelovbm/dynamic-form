@@ -2,8 +2,6 @@ import { SubmitButton } from "@/components/button/submit";
 import { Input } from "@/components/input";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
-import clsx from 'clsx'
-
 
 interface FieldsProps {
   type: string,
@@ -28,9 +26,10 @@ interface ResponseProps {
 }
 
 export default async function Form() {
-  const response = await fetch("http://localhost:8080/form/9cb1a855-4e62-470a-8fd6-aeb4e0d92833")
+  const response = await fetch("http://localhost:8080/forms/6b9eca42-1f08-42ee-8277-cf80efa31403")
   const body: ResponseProps = await response.json();
 
+  console.log(body)
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="my-4">
