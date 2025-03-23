@@ -1,5 +1,5 @@
 import { CreateFormInterface, FormGateway, FormIdAndNameInterface, FormInterface } from "domain/form/FormGateway";
-import prisma from "../prisma/db_client";
+import prisma from "../db_client";
 
 class FormPrisma implements FormGateway {
 
