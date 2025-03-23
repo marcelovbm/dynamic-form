@@ -3,9 +3,9 @@ import FormBuilderComponent from "@/components/form_builder";
 import { SaveFormButton } from "@/components/save_form_button";
 
 export default async function FormBuilder({ params }: { params: { id: string } }) {
-  const { id } = params;
+  const { id } = await params;
   const form = await GetFormsById(id);
-  console.log(form);
+  // console.log(form);
 
   return (
     <main className="flex w-full flex-col">
