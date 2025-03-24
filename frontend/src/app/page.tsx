@@ -1,9 +1,7 @@
 import { GetForms } from "@/actions/form";
 import CreateFormButton from "@/components/create_form_button";
-import FormContextProvider from "@/components/form_context";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle, CardHeader, CardFooter } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Toaster } from "@/components/ui/sonner";
 import Link from "next/link";
 
@@ -33,7 +31,7 @@ async function FormCards() {
           {/* <CardContent/> */}
           <CardFooter>
             <Button asChild className="w-full mt-4 cursor-pointer text-white">
-              <Link href={`/${id}`}>View Form</Link>
+              <Link href={`forms/${id}`}>View Form</Link>
             </Button>
           </CardFooter>
         </Card>

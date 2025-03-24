@@ -8,11 +8,15 @@ import { Input } from "../ui/input";
 import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 import { SelectGroup } from "@radix-ui/react-select";
 import formContext from "@/hooks/form-context";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
 
 export function FormBuilderComponent() {
 
   const { fields, addField, removeField } = formContext();
-  const [newField, setNewField] = useState({ label: "", type: "" });
+
+  const [newField, setNewField] = useState({ label: "", type: "", required: false });
+  const id = `fields-${fields.length}`
 
   return (
     <div className="flex gap-4 items-baseline">
@@ -31,6 +35,19 @@ export function FormBuilderComponent() {
               onChange={(e) => setNewField({ ...newField, label: e.target.value })}
               className="p-2 border rounded w-full mb-2"
             />
+            <div className="flex items-center gap-2 mb-2">
+              <Switch
+                id="required"
+                checked={newField.required}
+                typeof="boolean"
+                onCheckedChange={(checked) => {
+                  return checked
+                    ? setNewField({ ...newField, required: true })
+                    : setNewField({ ...newField, required: false })
+                }}
+              />
+              <Label htmlFor="required">Required</Label>
+            </div>
             <Select onValueChange={(value) => setNewField({ ...newField, type: value })}>
               <SelectTrigger className="w-full mb-2">
                 <SelectValue placeholder="Select a type"></SelectValue>
@@ -47,7 +64,7 @@ export function FormBuilderComponent() {
             </Select>
           </CardContent>
           <CardFooter>
-            <Button onClick={() => addField({ id: Date.now(), label: newField.label, type: newField.type as FormField["type"]})} className="px-4 py-2 rounded-lg w-full">
+            <Button onClick={() => addField({ id: id, question: newField.label, type: newField.type as FormField["type"], required: newField.required })} className="px-4 py-2 rounded-lg w-full">
               Add Field
             </Button>
           </CardFooter>

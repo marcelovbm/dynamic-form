@@ -8,14 +8,15 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { BiSolidTrash } from "react-icons/bi";
 export interface FormField {
-    id: number;
-    label: string;
-    type: "text" | "email" | "password" | "checkbox" | "radio" | "select" | "textarea";
+    id: string;
+    question: string;
+    type: "text" | "email" | "password" | "textarea";
+    required: boolean;
 }
 
 interface DynamicFormProps {
     fields: FormField[],
-    handleRemoveField: (fieldId: number) => void;
+    handleRemoveField: (fieldId: string) => void;
 }
 
 export function DynamicForm({ fields, handleRemoveField }: DynamicFormProps) {
@@ -27,23 +28,29 @@ export function DynamicForm({ fields, handleRemoveField }: DynamicFormProps) {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                {fields.map((field) => (
+                {
+                fields.map((field) => (
+                    
                     <div key={field.id} className="flex justify-between border-[#e5e7eb] rounded-md mb-3 border-1">
-                        <div className="p-2 w-full">
-                            <Label className="p-2">{field.label}</Label>
+                        <div className="p-2 grid w-full max-w-sm items-center gap-1.5">
+                            <Label className="p-2" htmlFor={field.question}>{field.question}</Label>
                             {field.type === "text" || field.type === "email" || field.type === "password" ? (
                                 <Input
+                                    id={field.question}
                                     type={field.type}
-                                    name={field.label}
-                                    className="p-2 border rounded"
+                                    name={field.question}
+                                    className="p-2 border rounded cursor-not-allowed"
                                     placeholder={field.type}
-                                    disabled
+                                    required={field.required}
+                                    readOnly
                                 />
                             ) : field.type === "textarea" ? (
                                 <Textarea
-                                    name={field.label}
+                                    id={field.question}
+                                    name={field.question}
                                     className="p-2 border rounded w-full"
                                     placeholder={field.type}
+                                    required={field.required}
                                     disabled
                                 />
                             ) : null}

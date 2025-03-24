@@ -6,7 +6,7 @@ import { FormField } from "../dynamic_form";
 type FormContextType = {
     fields: FormField[],
     addField: (field: FormField) => void,
-    removeField: (id: number) => void,
+    removeField: (id: string) => void,
 }
 
 export const FormContext = createContext<FormContextType | null>(null);
@@ -18,14 +18,14 @@ export default function FormContextProvider({
     const [fields, setFields] = useState<FormField[]>([]);
 
     const addField = (field: FormField) => {
-        if (!field.label) return;
+        if (!field.question) return;
         setFields((prevFields) => [
             ...prevFields,
             field,
         ]);
     };
 
-    const removeField = (id: number) => {
+    const removeField = (id: string) => {
         setFields(fields.filter((field) => field.id !== id));
     }
 
