@@ -7,7 +7,6 @@ export default async function FormBuilder({ params }: { params: { id: string } }
   const { id } = await params;
   const form = await GetFormsById(id);
 
-
   return (
     <main className="flex w-full flex-col">
       <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
@@ -16,7 +15,7 @@ export default async function FormBuilder({ params }: { params: { id: string } }
           <b>{form.name}</b>
         </h2>
         <div className="flex items-center gap-2">
-          {form.fields === null && (<SaveFormButton />)}
+          {form.fields === null && (<SaveFormButton id={id}/>)}
         </div>
       </nav>
       <div className="flex flex-grow items-center justify-center mt-4">

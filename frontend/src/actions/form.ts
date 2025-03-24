@@ -1,5 +1,6 @@
 "use server"
 
+import { FormField } from "@/components/dynamic_form";
 import { FormeSchema } from "@/schemas/create_form_schema";
 
 interface FieldsProps {
@@ -58,6 +59,7 @@ export async function GetForms() {
         if (!response.ok) {
             throw new Error("Something went wrong, please try again later");
         }
+
         const body: {
             statusCode: number,
             data: {id: string, name: string}[],
@@ -77,6 +79,28 @@ export async function GetFormsById(id: string) {
             headers: {
                 "Content-Type": "application/json",
             },
+        });
+
+        if (!response.ok) {
+            throw new Error("Something went wrong, please try again later");
+        }
+        const body: ResponseProps = await response.json();
+        return body.data;
+    } catch (error) {
+        throw new Error("Something went wrong, please try again later");
+    }
+}
+
+export async function PutFormsById(id: string, fields: FormField[]) {
+    try {
+        const URL = `${process.env.API_HOST}/forms/${id}`;
+        const response = await fetch(URL, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ fields: fields }),
+
         });
 
         if (!response.ok) {

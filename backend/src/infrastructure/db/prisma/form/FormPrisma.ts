@@ -1,7 +1,19 @@
-import { CreateFormInterface, FormGateway, FormIdAndNameInterface, FormInterface } from "domain/form/FormGateway";
+import { CreateFormInterface, FormGateway, FormIdAndNameInterface, FormInterface, UpdateFormInterface } from "domain/form/FormGateway";
 import prisma from "../db_client";
 
 class FormPrisma implements FormGateway {
+
+    async updateForm(data: UpdateFormInterface): Promise<FormInterface> {
+        const result = await prisma.form.update({
+            where: {
+                id: data.id
+            },
+            data: {
+                fields: data.fields
+            }
+        });
+        return result;
+    }
 
     async getForms(): Promise<FormIdAndNameInterface[] | null> {
         const result = await prisma.form.findMany( {
