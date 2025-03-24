@@ -1,85 +1,64 @@
 'use client';
 
-import React, { useState } from "react";
-
+import React from "react";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { BiSolidTrash } from "react-icons/bi";
 export interface FormField {
     id: number;
-    name: string;
     label: string;
     type: "text" | "email" | "password" | "checkbox" | "radio" | "select" | "textarea";
-    options?: string[]; // Used for select & radio button
 }
 
 interface DynamicFormProps {
-    fields: FormField[];
-    onSubmit: (data: Record<string, any>) => void;
+    fields: FormField[],
+    handleRemoveField: (fieldId: number) => void;
 }
 
-export function DynamicForm({ fields, onSubmit }: DynamicFormProps) {
-    const [formData, setFormData] = useState<Record<string, any>>({});
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const { name, value, type } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        onSubmit(formData);
-    };
-
+export function DynamicForm({ fields, handleRemoveField }: DynamicFormProps) {
     return (
-        <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-lg space-y-4 max-w-md mx-auto">
-            {fields.map((field) => (
-                <div key={field.id} className="flex flex-col">
-                    <label className="font-medium">{field.label}</label>
-
-                    {field.type === "text" || field.type === "email" || field.type === "password" ? (
-                        <input
-                            type={field.type}
-                            name={field.name}
-                            value={formData[field.name] || ""}
-                            onChange={handleChange}
-                            className="p-2 border rounded"
-                        />
-                    ) : field.type === "textarea" ? (
-                        <textarea
-                            name={field.name}
-                            value={formData[field.name] || ""}
-                            onChange={handleChange}
-                            className="p-2 border rounded"
-                        />
-                    ) : field.type === "checkbox" ? (
-                        <input
-                            type="checkbox"
-                            name={field.name}
-                            checked={formData[field.name] || false}
-                            onChange={handleChange}
-                            className="mt-1"
-                        />
-                    ) : field.type === "select" && field.options ? (
-                        <select name={field.name} value={formData[field.name] || ""} onChange={handleChange} className="p-2 border rounded">
-                            {field.options.map((option) => (
-                                <option key={option} value={option}>{option}</option>
-                            ))}
-                        </select>
-                    ) : field.type === "radio" && field.options ? (
-                        <div className="space-y-2">
-                            {field.options.map((option) => (
-                                <label key={option} className="flex items-center space-x-2">
-                                    <input type="radio" name={field.name} value={option} onChange={handleChange} />
-                                    <span>{option}</span>
-                                </label>
-                            ))}
+        <Card className="w-[350px] border-[#e5e7eb]">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2 justify-between">
+                    Field Added
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                {fields.map((field) => (
+                    <div key={field.id} className="flex justify-between border-[#e5e7eb] rounded-md mb-3 border-1">
+                        <div className="p-2 w-full">
+                            <Label className="p-2">{field.label}</Label>
+                            {field.type === "text" || field.type === "email" || field.type === "password" ? (
+                                <Input
+                                    type={field.type}
+                                    name={field.label}
+                                    className="p-2 border rounded"
+                                    placeholder={field.type}
+                                    disabled
+                                />
+                            ) : field.type === "textarea" ? (
+                                <Textarea
+                                    name={field.label}
+                                    className="p-2 border rounded w-full"
+                                    placeholder={field.type}
+                                    disabled
+                                />
+                            ) : null}
                         </div>
-                    ) : null}
-                </div>
-            ))}
-
-            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-lg">Submit</button>
-        </form>
+                        <div>
+                            <Button
+                                className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500 hover:bg-red-800"
+                                onClick={() => handleRemoveField(field.id)}>
+                                <BiSolidTrash className="text-white" />
+                            </Button>
+                        </div>
+                    </div>
+                ))}
+            </CardContent>
+            <CardFooter />
+        </Card>
     );
 };

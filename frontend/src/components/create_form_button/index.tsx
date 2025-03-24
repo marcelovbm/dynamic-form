@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -44,11 +43,11 @@ export default function CreateFormButton() {
     };
 
     return (
-        <Dialog >
+        <Dialog>
             <DialogTrigger asChild >
                 <Button className="cursor-pointer"> Create new form</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] border-[#e5e7eb]">
                 <DialogHeader>
                     <DialogTitle>Create new form</DialogTitle>
                     <DialogDescription>
@@ -75,7 +74,7 @@ export default function CreateFormButton() {
                     </Form>
                     <DialogFooter>
                         <Button
-                            className="w-full mt-4 cursor-pointer bg-blue-500 text-white"
+                            className="w-full mt-4 cursor-pointer"
                             onClick={form.handleSubmit(onSubmit)}>
                             {!form.formState.isSubmitting && <span>Save</span>}
                             {form.formState.isSubmitting && (

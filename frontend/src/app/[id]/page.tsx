@@ -1,11 +1,12 @@
 import { GetFormsById } from "@/actions/form";
 import FormBuilderComponent from "@/components/form_builder";
 import { SaveFormButton } from "@/components/save_form_button";
+import formContext from "@/hooks/form-context";
 
 export default async function FormBuilder({ params }: { params: { id: string } }) {
   const { id } = await params;
   const form = await GetFormsById(id);
-  // console.log(form);
+
 
   return (
     <main className="flex w-full flex-col">
@@ -15,13 +16,13 @@ export default async function FormBuilder({ params }: { params: { id: string } }
           <b>{form.name}</b>
         </h2>
         <div className="flex items-center gap-2">
-          { form.fields === null && (<SaveFormButton/>)}
+          {form.fields === null && (<SaveFormButton />)}
         </div>
       </nav>
       <div className="flex flex-grow items-center justify-center mt-4">
-        <FormBuilderComponent />
+        {form.fields === null && (<FormBuilderComponent />)}
       </div>
-      
+
     </main>
   );
 }

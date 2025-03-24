@@ -1,11 +1,11 @@
 import { Header } from "@/components/header";
 import "./globals.css";
-import { ReactNode } from "react";
+import FormContextProvider from "@/components/form_context";
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -13,7 +13,11 @@ export default function RootLayout({
         className={`antialiased`}
       >
         <Header></Header>
-        {children}
+        <main>
+          <FormContextProvider>
+            {children}
+          </FormContextProvider>
+        </main>
       </body>
     </html>
   );
