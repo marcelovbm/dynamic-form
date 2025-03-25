@@ -37,6 +37,7 @@ export default function CreateFormButton() {
             const FORM_ID = await CreateForm(data);
             console.log(FORM_ID);
             toast.success("Form created successfully");
+            form.reset({ name: ""})
         } catch (error) {
             toast.error("Somithing went wrong, please try again later");
         }

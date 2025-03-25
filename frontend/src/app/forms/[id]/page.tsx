@@ -2,6 +2,7 @@ import { GetFormsById } from "@/actions/form";
 import FormBuilderComponent from "@/components/form_builder";
 import FormSubmited from "@/components/form_submited";
 import { SaveFormButton } from "@/components/save_form_button";
+import { Toaster } from "sonner";
 
 export default async function FormBuilder({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -11,6 +12,7 @@ export default async function FormBuilder({ params }: { params: { id: string } }
 
   return (
     <main className="flex w-full flex-col">
+      <Toaster richColors />
       <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
         <h2 className="truncate font-medium">
           <span className="text-muted-foreground mr-2">Form: </span>

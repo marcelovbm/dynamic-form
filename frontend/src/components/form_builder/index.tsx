@@ -19,7 +19,7 @@ export function FormBuilderComponent() {
   const id = `fields-${fields.length}`
 
   return (
-    <div className="flex gap-4 items-baseline">
+    <div className="flex gap-4 items-baseline mt-4">
       <div>
         <Card className="w-[350px] border-[#e5e7eb]">
           <CardHeader>
@@ -28,7 +28,9 @@ export function FormBuilderComponent() {
             </CardTitle>
           </CardHeader>
           <CardContent>
+            <Label className="mb-2" htmlFor="question">Question</Label>
             <Input
+              id="question"
               type="text"
               placeholder="Field Label"
               value={newField.label}
@@ -48,11 +50,12 @@ export function FormBuilderComponent() {
               />
               <Label htmlFor="required">Required</Label>
             </div>
+            <Label className="mb-2" htmlFor="type">Type</Label>
             <Select onValueChange={(value) => setNewField({ ...newField, type: value })}>
               <SelectTrigger className="w-full mb-2">
                 <SelectValue placeholder="Select a type"></SelectValue>
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent id="type">
                 <SelectGroup>
                   <SelectLabel>Types</SelectLabel>
                   <SelectItem value="text">Text</SelectItem>

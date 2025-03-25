@@ -15,12 +15,11 @@ export default function FormSubmited({ id,
     elements: { [key: string]: FieldsProps }
 }) {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
 
     const onSubmit = async (data: any) => {
         try {
-            // console.log(data);
             const request: any = [];
             Object.keys(data).map((key) => {
                 request.push(
@@ -33,6 +32,7 @@ export default function FormSubmited({ id,
             console.log(request)
             await SubmitDataForm(id, request);
             toast.success("Form created successfully");
+            reset()
         } catch (error) {
             toast.error("Somithing went wrong, please try again later");
         }
