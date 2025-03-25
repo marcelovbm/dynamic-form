@@ -1,3 +1,28 @@
+# Dynamic Form
+
+This is a **Dynamic Form** project built with **Next.js** (App Router), **TypeScript**, and **Tailwind CSS**. The application allows users to create and view forms dynamically.
+
+## Features
+
+- **Dynamic Form Creation**: Users can create forms dynamically.
+- **Form Listing**: Displays a list of forms fetched from an API.
+- **Responsive Design**: Built with Tailwind CSS for a mobile-friendly UI.
+- **TypeScript Support**: Ensures type safety and better developer experience.
+
+## Tech Stack
+
+- **Next.js**: Framework for building React applications with server-side rendering and static site generation.
+- **TypeScript**: For type safety and better code maintainability.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **React**: Frontend library for building user interfaces.
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/dynamic-form.git
+   cd dynamic-form
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
