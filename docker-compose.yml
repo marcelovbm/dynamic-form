@@ -1,0 +1,58 @@
+services:
+  database:
+    container_name: database
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: vial
+      POSTGRES_PASSWORD: vial
+      POSTGRES_DB: vial
+    ports:
+      - 5432:5432    
+    networks:
+      - form_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  api:
+    container_name: api
+    image: node:18.15.0
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.local
+    command: npm run dev
+    environment:
+      - DATABASE_URL=postgres://vial:vial@database:5432/vial?schema=public
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
+    networks:
+      - form_network
+  web:
+    container_name: web
+    image: node:22.12.0
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.local
+    environment:
+        API_HOST: http://api:8080
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    depends_on:
+      - api
+    ports:
+      - 3000:3000
+    networks:
+      - form_network
+
+networks:
+  form_network:
+
+volumes:
+  db:

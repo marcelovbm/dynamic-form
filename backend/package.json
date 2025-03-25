@@ -33,7 +33,8 @@
     "migrate": "docker exec -it vial-backend-b-api npx prisma migrate deploy",
     "seed": "docker exec -it vial-backend-b-api npx prisma db seed",
     "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix"
+    "lint:fix": "eslint src --ext .ts --fix",
+    "start:compose": "prisma migrate deploy && npm run start"
   },
   "keywords": [],
   "author": "",
