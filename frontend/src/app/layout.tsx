@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import "./globals.css";
 import FormContextProvider from "@/components/form_context";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
         <main>
           <FormContextProvider>
             {children}
+            <Toaster richColors />
           </FormContextProvider>
         </main>
       </body>

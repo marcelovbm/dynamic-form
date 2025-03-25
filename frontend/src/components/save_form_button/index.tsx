@@ -4,6 +4,8 @@ import { PutFormsById } from "@/actions/form";
 import { Button } from "../ui/button";
 import { HiSaveAs } from "react-icons/hi";
 import formContext from "@/hooks/form-context";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 export function SaveFormButton({
     id
 }: {
@@ -11,9 +13,20 @@ export function SaveFormButton({
 }) {
 
     const { fields } = formContext();
+    const router = useRouter();
 
     const save = async () => {
-        await PutFormsById(id, fields);
+        try {
+            if (fields.length === 0) {
+                toast.warning("You should add a fields first.");
+                return;
+            };
+            await PutFormsById(id, fields);
+            toast.success("Form created successfully");
+            router.push("/")
+        } catch (error) {
+            toast.error("Somithing went wrong, please try again later");
+        }
     }
     return (
         <Button

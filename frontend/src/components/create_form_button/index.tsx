@@ -26,8 +26,10 @@ import { toast } from "sonner";
 import { FormeSchema, joiSchema } from "@/schemas/create_form_schema";
 import { CreateForm } from "@/actions/form";
 import { Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation";
 
 export default function CreateFormButton() {
+    const router = useRouter();
     const form = useForm<FormeSchema>({
         resolver: joiResolver(joiSchema),
     });
@@ -35,9 +37,8 @@ export default function CreateFormButton() {
     const onSubmit = async (data: FormeSchema) => {
         try {
             const FORM_ID = await CreateForm(data);
-            console.log(FORM_ID);
             toast.success("Form created successfully");
-            form.reset({ name: ""})
+            router.push(`/forms/${FORM_ID}`)
         } catch (error) {
             toast.error("Somithing went wrong, please try again later");
         }
