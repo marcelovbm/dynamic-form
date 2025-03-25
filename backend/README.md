@@ -133,7 +133,7 @@
 
 ---
 
-### 4. **Create a New Form**
+### 4. **Update a Form**
 
 - **Endpoint**: `/forms/:id`
 - **Method**: `PUT`
